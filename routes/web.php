@@ -13,20 +13,20 @@
 
 
 
-Route::group(['middleware' => 'web'], function () {
   Route::get('/', function () {
       return view('welcome');
   });
 
-  Route::get('home', 'HomeController@index')->middleware('home');
+    Route::get('home', 'HomeController@index')->middleware('home');
 
-  Route::post('login', 'Auth\LoginController@doLogin');
+    Route::group(['middleware' => 'guest'], function () {
 
-  Route::get('login', 'Auth\LoginController@showLogin');
+      Route::post('login', 'Auth\LoginController@doLogin');
 
-  Route::get('register', 'Auth\RegisterController@show');
+      Route::get('login', 'Auth\LoginController@showLogin');
 
-  Route::post('register', 'Auth\RegisterController@register');
+      Route::get('register', 'Auth\RegisterController@show');
 
+      Route::post('register', 'Auth\RegisterController@register');
 
-});
+    });

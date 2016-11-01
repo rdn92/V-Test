@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -38,7 +39,6 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
     }
 
     public function showLogin()
@@ -65,9 +65,10 @@ class LoginController extends Controller
         }
 
         if (Auth::attempt($userdata)) {
-            echo 'SUCCESS!';
-        } else {
+            Auth::login(User::first());
             return Redirect::to('home');
+        } else {
+            return Redirect::to('login');
         }
     }
 }

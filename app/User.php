@@ -17,12 +17,12 @@ class User extends Model implements Authenticatable
 
     public function getAuthIdentifier()
     {
-
+      return $this->email;
     }
 
     public function getAuthPassword()
     {
-
+      return $this->password;
     }
 
     public function getRememberToken()
