@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -35,5 +39,35 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    public function showLogin()
+    {
+        return view('auth.login', []);
+    }
+
+    public function doLogin()
+    {
+        $rules = array(
+            'email'    => 'required|email',
+            'password' => 'required|alphaNum|min:3'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('home');
+        } else {
+            $userdata = array(
+                'email'     => Input::get('email'),
+                'password'  => Input::get('password')
+            );
+        }
+
+        if (Auth::attempt($userdata)) {
+            echo 'SUCCESS!';
+        } else {
+            return Redirect::to('home');
+        }
     }
 }

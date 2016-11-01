@@ -11,8 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('home', 'HomeController@index')->middleware('home');
+
+Route::group(['middleware' => 'web'], function () {
+  Route::get('/', function () {
+      return view('welcome');
+  });
+
+  Route::get('home', 'HomeController@index')->middleware('home');
+
+  Route::post('login', 'Auth\LoginController@doLogin');
+
+  Route::get('login', 'Auth\LoginController@showLogin');
+
+  Route::get('register', 'Auth\RegisterController@show');
+
+  Route::post('register', 'Auth\RegisterController@register');
+
+
+});

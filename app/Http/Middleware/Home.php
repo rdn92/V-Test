@@ -15,6 +15,12 @@ class Home
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if (\Auth::guest())
+        {
+          return $next($request);
+        }
+        else {
+          echo "nisi ulogovan si decace";
+        }
     }
 }
