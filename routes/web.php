@@ -23,10 +23,13 @@
 
       Route::post('login', 'Auth\LoginController@doLogin');
 
-      Route::get('login', 'Auth\LoginController@showLogin');
+      Route::get('login', 'Auth\LoginController@showLoginForm');
 
       Route::get('register', 'Auth\RegisterController@show');
 
       Route::post('register', 'Auth\RegisterController@register');
 
     });
+
+    Route::post('logout', 'Auth\LoginController@logout')->middleware('auth');
+

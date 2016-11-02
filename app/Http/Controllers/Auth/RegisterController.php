@@ -46,11 +46,21 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        Validator::extend('zemlja', function($attribute, $value, $parameters, $validator) {
+            return in_array($value, User::$countries);
+        });
+
+
         return Validator::make($data, [
-            'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'company' => 'required',
+            //'country' => 'required|in:' . implode(',', User::$countries),
+            'country' => 'required|zemlja',
         ]);
+
     }
 
     /**
@@ -62,14 +72,17 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'company' => $data['company'],
+            'country' => $data['country'],
         ]);
     }
 
     public function show()
     {
-        return view('auth.register');
+        return view('auth.register')->with('countries', User::$countries);
     }
 }

@@ -10,6 +10,7 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/signin.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,11 +21,14 @@
   </head>
   <body>
     <div class="container">
+
       @include('partials.header')
 
-      <h1>Hello, world!</h1>
+      @yield('content')
 
-      @include('partials.footer')
     </div>
+
+    @include('partials.footer')
+
   </body>
 </html>

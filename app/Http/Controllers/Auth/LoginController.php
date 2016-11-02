@@ -41,11 +41,6 @@ class LoginController extends Controller
     {
     }
 
-    public function showLogin()
-    {
-        return view('auth.login', []);
-    }
-
     public function doLogin()
     {
         $rules = array(
@@ -71,4 +66,5 @@ class LoginController extends Controller
             return Redirect::to('login');
         }
     }
+
 }
