@@ -15,24 +15,18 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-       @if (isset(Auth::user()->first_name))
          <ul class="nav navbar-nav navbar-right">
            <li class="dropdown">
-             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->first_name }} <span class="caret"></span></a>
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ (isset(Auth::user()->first_name)) ? Auth::user()->first_name : 'User' }} <span class="caret"></span></a>
              <ul class="dropdown-menu">
                <li>
-                 <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                 <a href="{{ url('/logout') }}">
                    Log Out
                  </a>
-
-                 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                   {{ csrf_field() }}
-                 </form>
                </li>
              </ul>
            </li>
          </ul>
-       @endif
    </div><!-- /.navbar-collapse -->
  </div><!-- /.container-fluid -->
 </nav>

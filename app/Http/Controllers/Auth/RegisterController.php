@@ -41,16 +41,11 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
-        Validator::extend('zemlja', function($attribute, $value, $parameters, $validator) {
-            return in_array($value, User::$countries);
-        });
-
-
         return Validator::make($data, [
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',

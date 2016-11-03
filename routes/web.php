@@ -31,5 +31,5 @@
 
     });
 
-    Route::post('logout', 'Auth\LoginController@logout')->middleware('auth');
+    Route::get('logout', 'Auth\LoginController@doLogout')->middleware('auth');
 

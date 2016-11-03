@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
 use Auth;
 use App\User;
 
@@ -60,11 +61,21 @@ class LoginController extends Controller
         }
 
         if (Auth::attempt($userdata)) {
-            Auth::login(User::first());
             return Redirect::to('home');
         } else {
             return Redirect::to('login');
         }
+    }
+
+    public function doLogout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect('/home');
     }
 
 }

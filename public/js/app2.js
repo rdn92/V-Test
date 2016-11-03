@@ -20,20 +20,20 @@
 //
 // var personInstance = new PersonConstructor();
 
-var Person = {
+var person = {
     first_name: null,
     last_name: null,
     gender: null
 };
 
-Person.staticVar = "cevap";
-Person.staticMeth = function() {
+person.staticVar = "cevap";
+person.staticMeth = function() {
 
 };
 
-var personObj  = Object.create(Person);
+var personObj  = Object.create(person);
 
-var Employee = Object.create(Person, {
+var employee = Object.create(person, {
     id: {
         value: null,
         enumerable: true,
