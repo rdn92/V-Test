@@ -33,3 +33,4 @@
 
     Route::get('logout', 'Auth\LoginController@doLogout')->middleware('auth');
 
+Route::resource('todos', 'TodosController');

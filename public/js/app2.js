@@ -81,3 +81,4 @@ var employee = Object.create(person, {
  // // create an instance of Employee
  // var david = Employee.create("David", "Aurelio", 1);
  // david.toString(); // "[id: 1 / David Aurelio]"
+

@@ -5,6 +5,6 @@
   <a href="/login" class="btn btn-primary">Login</a>
   <a href="/register" class="btn btn-primary">Register</a>
   @else
-  <p>Hello World!</p>
+    <my-app>Loading...</my-app>
   @endif
 @endsection

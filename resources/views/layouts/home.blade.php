@@ -18,10 +18,40 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+      <script>
+          <?php
+          include('../node_modules/core-js/client/shim.min.js');
+          ?>
+      </script>
+      <script>
+          <?php
+          include('../node_modules/zone.js/dist/zone.js');
+          ?>
+      </script>
+      <script>
+          <?php
+          include('../node_modules/reflect-metadata/Reflect.js');
+          ?>
+      </script>
+      <script>
+          <?php
+          include('../node_modules/systemjs/dist/system.src.js');
+          ?>
+      </script>
+      <script>
+          <?php
+          include('../systemjs.config.js');
+          ?>
+      </script>
+      <script>
+          System.import('../../../assets/ts/app').catch(function(err){ console.error(err); });
+      </script>
+
   </head>
   <body>
     <div class="container">
-
+      <my-app>Loading...</my-app>
       @include('partials.header')
 
       @yield('content')
