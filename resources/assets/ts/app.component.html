@@ -1,41 +1,46 @@
-<section class="todoapp">
-    <header class="header">
-        <h1>Todos</h1>
-        <!--<input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">-->
-    </header>
-    <section class="main" *ngIf="todos.length > 0">
-        <ul class="todo-list">
-            <li *ngFor="let todo of todos" [class.completed]="todo.complete">
-                <div class="view">
-                    <!--<input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">-->
-                    <label>{{todo.title}}</label>
-                    <!--<button class="destroy" (click)="removeTodo(todo)"></button>-->
-                </div>
-            </li>
-        </ul>
-    </section>
-    <footer class="footer" *ngIf="todos.length > 0">
-        <!--<span class="todo-count"><strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}} left</span>-->
-    </footer>
+<div class="container">
+    <!--<header class="header">-->
+        <!--<h1>Todos</h1>-->
+        <!--&lt;!&ndash;<input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">&ndash;&gt;-->
+    <!--</header>-->
+    <!--<section class="main" *ngIf="todos.length > 0">-->
+        <!--<ul class="todo-list">-->
+            <!--<li *ngFor="let todo of todos" [class.completed]="todo.complete">-->
+                <!--<div class="view">-->
+                    <!--&lt;!&ndash;<input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">&ndash;&gt;-->
+                    <!--<label>{{todo.title}}</label>-->
+                    <!--&lt;!&ndash;<button class="destroy" (click)="removeTodo(todo)"></button>&ndash;&gt;-->
+                <!--</div>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</section>-->
+    <!--<footer class="footer" *ngIf="todos.length > 0">-->
+        <!--&lt;!&ndash;<span class="todo-count"><strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}} left</span>&ndash;&gt;-->
+    <!--</footer>-->
 
 
     <div class="col-lg-6">
-
-        <input placeholder="Add" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
-    <div class="input-group" *ngFor="let todo of todos">
-        <input [class.done]="todo.done" type="text" class="form-control" value="{{ todo.title }}">
-        <div class="input-group-btn">
-            <button (click)="toggleDone(todo)" class="btn btn-success" [class.active]="todo.done" type="button"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
-            <button (click)="removeTodo(todo)" class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Priority <span class="caret"></span></button>
-            <ul class="dropdown-menu dropdown-menu-right">
-                <li><a (click)="setPriority(todo, 'high')" href="#"><span *ngIf="todo.priority == 'high'" class="glyphicon glyphicon-ok"></span> High</a></li>
-                <li><a (click)="setPriority(todo, 'normal')" href="#"><span *ngIf="todo.priority == 'normal'" class="glyphicon glyphicon-ok"></span> Normal</a></li>
-                <li><a (click)="setPriority(todo, 'low')" href="#"><span *ngIf="todo.priority == 'low'" class="glyphicon glyphicon-ok"></span> Low</a></li>
-            </ul>
+        <div>
+        <input style="width: 100%" #todoTitle placeholder="Add" autofocus="" (keyup.enter)="addTodo(todoTitle.value); todoTitle.value=''">
         </div>
-    </div>
+        <br>
+        <div *ngFor="let todo of todos">
+        <div class="input-group">
+            <input [class.done]="todo.done" type="text" (keyup.enter)="renameTodo(todo)" [(ngModel)]="todo.title" class="form-control">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Priority <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a (click)="setPriority(todo, 'high')" href="#"><span *ngIf="todo.priority == 'high'" class="glyphicon glyphicon-ok"></span> High</a></li>
+                    <li><a (click)="setPriority(todo, 'normal')" href="#"><span *ngIf="todo.priority == 'normal'" class="glyphicon glyphicon-ok"></span> Normal</a></li>
+                    <li><a (click)="setPriority(todo, 'low')" href="#"><span *ngIf="todo.priority == 'low'" class="glyphicon glyphicon-ok"></span> Low</a></li>
+                </ul>
+                <button (click)="toggleDone(todo)" class="btn btn-success" [class.active]="todo.done" type="button"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                <button (click)="removeTodo(todo); $event.stopPropagation()" class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            </div>
+
+        </div>
+        <br>
+        </div>
 
     </div>
-</section>
+</div>

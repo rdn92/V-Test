@@ -11,44 +11,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
-var todo_1 = require("./todo");
 var TodoService = (function () {
     function TodoService(http) {
         this.http = http;
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.todosUrl = 'http://localhost/todos';
-        this.asd = [new todo_1.Todo(1, 'naslov', false, 'high', 1), new todo_1.Todo(2, 'naslov2', true, 'normal', 2)];
     }
-    // getTodos(): Promise<Todo[]> {
-    //     return this.http.get(this.todosUrl)
-    //         .toPromise()
-    //         .then(response => response.json().data as Todo[])
-    //         .catch(this.handleError);
-    // }
-    //
-    // private handleError(error: any): Promise<any> {
-    //     console.error('An error occurred', error);
-    //     return Promise.reject(error.message || error);
-    // }
-    TodoService.prototype.createTodo = function (todo) {
-        this.asd[this.asd.length] = new todo_1.Todo(this.asd.length + 1, todo.title, todo.done, todo.priority, todo.position);
-    };
     TodoService.prototype.readTodos = function () {
-        return Promise.resolve(this.asd);
+        return this.http.get(this.todosUrl)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    TodoService.prototype.createTodo = function (title) {
+        return this.http
+            .post(this.todosUrl, JSON.stringify({ title: title, done: false, priority: 'normal' }), { headers: this.headers })
+            .toPromise()
+            .then(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    TodoService.prototype.deleteTodo = function (id) {
+        var url = this.todosUrl + "/" + id;
+        return this.http.delete(url, { headers: this.headers })
+            .toPromise()
+            .then(function () { return null; })
+            .catch(this.handleError);
     };
     TodoService.prototype.updateTodo = function (todo) {
-        for (var i = 0; i < this.asd.length; i++) {
-            if (this.asd[i].id === todo.id) {
-                this.asd[i] = todo;
-            }
-        }
+        var url = this.todosUrl + "/" + todo.id;
+        return this.http
+            .put(url, JSON.stringify(todo), { headers: this.headers })
+            .toPromise()
+            .then(function () { return todo; })
+            .catch(this.handleError);
     };
-    TodoService.prototype.deleteTodo = function (todo) {
-        for (var i = 0; i < this.asd.length; i++) {
-            if (this.asd[i].id === todo.id) {
-                delete this.asd[i];
-            }
-        }
-        // ovde se poziva delete
+    TodoService.prototype.handleError = function (error) {
+        console.error('An error occurred', error);
+        return Promise.reject(error.message || error);
     };
     TodoService = __decorate([
         core_1.Injectable(), 

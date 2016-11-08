@@ -12,8 +12,7 @@ import { Todo }        from "./todo";
 
 export class AppComponent implements OnInit {
 
-    todos: Todo[] = [];
-    newTodo: Todo = new Todo(null, '', false, '', 0);
+    todos: Todo[];
 
     constructor(private todoService: TodoService) { }
 
@@ -24,22 +23,23 @@ export class AppComponent implements OnInit {
 
     toggleDone(todo: Todo): void {
         todo.done = !todo.done;
-        this.todoService.updateTodo(todo);
-        this.ngOnInit(); // refresh
+        this.todoService.updateTodo(todo).then(todo => this.todos.filter(t => t.id === todo.id)[0] = todo);
     }
 
     removeTodo(todo: Todo): void {
-        this.todoService.deleteTodo(todo);
-        this.ngOnInit(); // refresh
+        this.todoService.deleteTodo(todo.id).then(() => this.todos = this.todos.filter(t => t !== todo));
     }
 
-    addTodo(): void {
-        this.todoService.createTodo(this.newTodo);
+    addTodo(title: string): void {
+        this.todoService.createTodo(title).then(todo => this.todos.push(todo));
     }
 
     setPriority(todo: Todo, priority: string): void {
         todo.priority = priority;
-        this.todoService.updateTodo(todo);
-        this.ngOnInit(); // refresh
+        this.todoService.updateTodo(todo).then(todo => this.todos.filter(t => t.id === todo.id)[0] = todo);
+    }
+
+    renameTodo(todo: Todo): void {
+        this.todoService.updateTodo(todo).then(todo => this.todos.filter(t => t.id === todo.id)[0] = todo);
     }
 }

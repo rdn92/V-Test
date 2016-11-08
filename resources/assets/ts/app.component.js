@@ -10,12 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var todo_service_1 = require('./todo.service');
-var todo_1 = require("./todo");
 var AppComponent = (function () {
     function AppComponent(todoService) {
         this.todoService = todoService;
-        this.todos = [];
-        this.newTodo = new todo_1.Todo(null, '', false, '', 0);
     }
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -23,21 +20,26 @@ var AppComponent = (function () {
             .then(function (todos) { return _this.todos = todos; });
     };
     AppComponent.prototype.toggleDone = function (todo) {
+        var _this = this;
         todo.done = !todo.done;
-        this.todoService.updateTodo(todo);
-        this.ngOnInit(); // refresh
+        this.todoService.updateTodo(todo).then(function (todo) { return _this.todos.filter(function (t) { return t.id === todo.id; })[0] = todo; });
     };
     AppComponent.prototype.removeTodo = function (todo) {
-        this.todoService.deleteTodo(todo);
-        this.ngOnInit(); // refresh
+        var _this = this;
+        this.todoService.deleteTodo(todo.id).then(function () { return _this.todos = _this.todos.filter(function (t) { return t !== todo; }); });
     };
-    AppComponent.prototype.addTodo = function () {
-        this.todoService.createTodo(this.newTodo);
+    AppComponent.prototype.addTodo = function (title) {
+        var _this = this;
+        this.todoService.createTodo(title).then(function (todo) { return _this.todos.push(todo); });
     };
     AppComponent.prototype.setPriority = function (todo, priority) {
+        var _this = this;
         todo.priority = priority;
-        this.todoService.updateTodo(todo);
-        this.ngOnInit(); // refresh
+        this.todoService.updateTodo(todo).then(function (todo) { return _this.todos.filter(function (t) { return t.id === todo.id; })[0] = todo; });
+    };
+    AppComponent.prototype.renameTodo = function (todo) {
+        var _this = this;
+        this.todoService.updateTodo(todo).then(function (todo) { return _this.todos.filter(function (t) { return t.id === todo.id; })[0] = todo; });
     };
     AppComponent = __decorate([
         core_1.Component({

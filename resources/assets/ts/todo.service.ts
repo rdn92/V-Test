@@ -1,5 +1,5 @@
 import { Injectable }    from '@angular/core';
-import { Http } from '@angular/http';
+import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -8,48 +8,47 @@ import {Todo} from "./todo";
 @Injectable()
 export class TodoService {
 
+    private headers = new Headers({'Content-Type': 'application/json'});
     private todosUrl = 'http://localhost/todos';
-
-    asd = [new Todo(1, 'naslov', false, 'high', 1), new Todo(2, 'naslov2', true, 'normal', 2)];
 
     constructor(private http: Http) { }
 
-    // getTodos(): Promise<Todo[]> {
-    //     return this.http.get(this.todosUrl)
-    //         .toPromise()
-    //         .then(response => response.json().data as Todo[])
-    //         .catch(this.handleError);
-    // }
-    //
-    // private handleError(error: any): Promise<any> {
-    //     console.error('An error occurred', error);
-    //     return Promise.reject(error.message || error);
-    // }
-
-    createTodo(todo: Todo) {
-        this.asd[this.asd.length] = new Todo(this.asd.length + 1, todo.title, todo.done, todo.priority, todo.position);
-    }
-
     readTodos(): Promise<Todo[]> {
-        return Promise.resolve(this.asd);
+        return this.http.get(this.todosUrl)
+            .toPromise()
+            .then(response => response.json() as Todo[])
+            .catch(this.handleError);
     }
 
-    updateTodo(todo: Todo) {
-        for (var i = 0; i < this.asd.length; i++) {
-            if (this.asd[i].id === todo.id) {
-                this.asd[i] = todo;
-            }
-        }
+    createTodo(title: string): Promise<Todo> {
+        return this.http
+            .post(this.todosUrl, JSON.stringify({title: title, done: false, priority: 'normal'}), {headers: this.headers})
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError);
     }
 
-    deleteTodo(todo: Todo) {
-        for (var i = 0; i < this.asd.length; i++) {
-            if (this.asd[i].id === todo.id) {
-                delete this.asd[i];
-            }
-        }
-        // ovde se poziva delete
+
+    deleteTodo(id: number): Promise<void> {
+        const url = `${this.todosUrl}/${id}`;
+        return this.http.delete(url, {headers: this.headers})
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
     }
 
+    updateTodo(todo: Todo): Promise<Todo> {
+        const url = `${this.todosUrl}/${todo.id}`;
+        return this.http
+            .put(url, JSON.stringify(todo), {headers: this.headers})
+            .toPromise()
+            .then(() => todo)
+            .catch(this.handleError);
+    }
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error);
+        return Promise.reject(error.message || error);
+    }
 
 }

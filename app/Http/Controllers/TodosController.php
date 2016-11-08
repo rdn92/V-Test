@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Todo;
 
 class TodosController extends Controller
@@ -72,7 +72,9 @@ class TodosController extends Controller
     public function update(Request $request, $id)
     {
         $todo = Todo::find($id);
+        $todo->title = Request::input('title');
         $todo->done = Request::input('done');
+        $todo->priority = Request::input('priority');
         $todo->save();
 
         return $todo;
