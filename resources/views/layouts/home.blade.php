@@ -1,64 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Logo</title>
+{{--<!DOCTYPE html>--}}
+{{--<html lang="en">--}}
+  {{--<head>--}}
+    {{--<meta charset="utf-8">--}}
+    {{--<meta http-equiv="X-UA-Compatible" content="IE=edge">--}}
+    {{--<meta name="viewport" content="width=device-width, initial-scale=1">--}}
+    {{--<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->--}}
+    {{--<title>Logo</title>--}}
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/signin.css" rel="stylesheet">
+    {{--<!-- Bootstrap -->--}}
+    {{--<link href="css/bootstrap.min.css" rel="stylesheet">--}}
+    {{--<link href="css/style.css" rel="stylesheet">--}}
+    {{--<link href="css/signin.css" rel="stylesheet">--}}
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    {{--<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->--}}
+    {{--<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->--}}
+    {{--<!--[if lt IE 9]>--}}
+      {{--<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>--}}
+      {{--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>--}}
+    {{--<![endif]-->--}}
 
-      <script>
-          <?php
-          include('../node_modules/core-js/client/shim.min.js');
-          ?>
-      </script>
-      <script>
-          <?php
-          include('../node_modules/zone.js/dist/zone.js');
-          ?>
-      </script>
-      <script>
-          <?php
-          include('../node_modules/reflect-metadata/Reflect.js');
-          ?>
-      </script>
-      <script>
-          <?php
-          include('../node_modules/systemjs/dist/system.src.js');
-          ?>
-      </script>
-      <script>
-          <?php
-          include('../systemjs.config.js');
-          ?>
-      </script>
-      <script>
-          System.import('../../../assets/ts/app').catch(function(err){ console.error(err); });
-      </script>
+  {{--</head>--}}
+  {{--<body>--}}
+    {{--<div class="container">--}}
+      {{--@include('partials.header')--}}
 
-  </head>
-  <body>
-    <div class="container">
-      <my-app>Loading...</my-app>
-      @include('partials.header')
+      {{--@yield('content')--}}
 
-      @yield('content')
+    {{--</div>--}}
 
-    </div>
+    {{--@include('partials.footer')--}}
 
-    @include('partials.footer')
+  {{--</body>--}}
+{{--</html>--}}
 
-  </body>
+
+
+<html>
+<head>
+  <title>Angular QuickStart</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+
+    .done {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<!-- 3. Display the application -->
+<body>
+<todo-app>Loading...</todo-app>
+
+<script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
 </html>
