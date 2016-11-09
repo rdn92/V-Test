@@ -7,11 +7,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
-<<<<<<< dcf4e3aa5b6c5c21245c8f0756a643883fbd02fc
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true
-  }
-=======
     "noImplicitAny": false
   },
   "exclude": [
@@ -20,5 +15,4 @@
     "resources/assets/typescript/typings",
     "resources/assets/typescript/vendor.ts"
   ]
->>>>>>> working
 }

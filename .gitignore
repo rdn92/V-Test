@@ -1,5 +1,7 @@
 /node_modules
 /public/storage
+/public/builds
+/public/ng2js
 /storage/*.key
 /vendor
 /.idea
