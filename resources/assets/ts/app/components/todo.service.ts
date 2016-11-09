@@ -9,7 +9,7 @@ import {Todo} from "./todo";
 export class TodoService {
 
     private headers = new Headers({'Content-Type': 'application/json'});
-    private todosUrl = 'http://localhost/todos';
+    private todosUrl = '/todos';
 
     constructor(private http: Http) { }
 

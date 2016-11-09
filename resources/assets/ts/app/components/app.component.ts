@@ -4,9 +4,9 @@ import { TodoService } from './todo.service'
 import { Todo }        from "./todo";
 
 @Component({
-    moduleId: module.id,
+    //moduleId: module.id,
     selector: 'todo-app',
-    templateUrl: 'app.component.html',
+    template: require('./app.component.html'),
     providers:    [ TodoService ]
 })
 
