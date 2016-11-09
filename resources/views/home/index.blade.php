@@ -1,3 +1,4 @@
+<<<<<<< dcf4e3aa5b6c5c21245c8f0756a643883fbd02fc
 {{--@extends('layouts.home')--}}
 
 {{--@section('content')--}}
@@ -33,3 +34,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>
+=======
+@extends('layouts.home')
+
+@section('content')
+  @if (Auth::guest())
+  <a href="/login" class="btn btn-primary">Login</a>
+  <a href="/register" class="btn btn-primary">Register</a>
+  @else
+  @endif
+@endsection
+>>>>>>> working
